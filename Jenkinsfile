@@ -28,6 +28,11 @@ pipeline {
 			    description: 'Enter the image Tag to deploy',
                             trim: true
                             ),
+				string(
+                            defaultValue: 'develop',
+                            name: 'Area',
+			    description: 'Enter the image Tag to deploy',
+                            trim: true)
                         ])
                     ])
                 }
