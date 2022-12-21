@@ -40,28 +40,28 @@ pipeline {
 
                           string(
                             defaultValue: 'donelogio-001',
-                            name: 'DB-Tag',
+                            name: 'DBTag',
 			    description: 'Required to enter the image tag',
                             trim: true
                             ),
 
                           string(
                             defaultValue: 'donelogio-001',
-                            name: 'UI-Tag',
+                            name: 'UITag',
 			    description: 'Required to enter the image tag',
                             trim: true
                             ),
 
                           string(
                             defaultValue: 'donelogio-001',
-                            name: 'WHEATHER-Tag',
+                            name: 'WHEATHERTag',
 			    description: 'Required to enter the image tag',
                             trim: true
                             ),
 
                           string(
                             defaultValue: 'donelogio-001',
-                            name: 'AUTH-Tag',
+                            name: 'AUTHTag',
 			    description: 'Required to enter the image tag',
                             trim: true
                             )
@@ -112,7 +112,7 @@ pipeline {
         stage('Build-dev') {
             steps {
                 sh '''
-                cd UI
+cd UI
 docker build -t devopseasylearning2021/s4-ui:$UITag .
 cd -
 cd DB
