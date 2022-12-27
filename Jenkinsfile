@@ -17,9 +17,6 @@ pipeline {
 
     stages {
 
-
-
-
         stage('Setup parameters') {
             steps {
                 script {
@@ -191,28 +188,46 @@ pipeline {
         
 
         stage('Push-to-dockerhub-dev') {
+            when{ 
+                expression {
+                    env.Environment == 'DEV' }
+                 }
             steps {
                 sh '''
-                ls 
-                pwd
+                docker push  devopseasylearning2021/s4-ui:${BUILD_NUMBER}$UITag
+                docker push  devopseasylearning2021/s4-db:${BUILD_NUMBER}$DBTag
+                docker push  devopseasylearning2021/s4-auth:${BUILD_NUMBER}$AUTHTag 
+                docker push  devopseasylearning2021/s4-weather:${BUILD_NUMBER}$WEATHERTag
                 '''
             }
         }
 
-        stage('Push-to-dockerhub-preprod') {
+        stage('Push-to-dockerhub-sandbox') {
+            when{ 
+                expression {
+                    env.Environment == 'SANBOX' }
+                 }
             steps {
                 sh '''
-                ls 
-                pwd
+                docker push  devopseasylearning2021/s4-ui:${BUILD_NUMBER}$UITag
+                docker push  devopseasylearning2021/s4-db:${BUILD_NUMBER}$DBTag
+                docker push  devopseasylearning2021/s4-auth:${BUILD_NUMBER}$AUTHTag 
+                docker push  devopseasylearning2021/s4-weather:${BUILD_NUMBER}$WEATHERTag
                 '''
             }
         }
 
         stage('Push-to-dockerhub-prod') {
+            when{ 
+                expression {
+                    env.Environment == 'PROD' }
+                 }
             steps {
                 sh '''
-                ls 
-                pwd
+                docker push  devopseasylearning2021/s4-ui:${BUILD_NUMBER}$UITag
+                docker push  devopseasylearning2021/s4-db:${BUILD_NUMBER}$DBTag
+                docker push  devopseasylearning2021/s4-auth:${BUILD_NUMBER}$AUTHTag 
+                docker push  devopseasylearning2021/s4-weather:${BUILD_NUMBER}$WEATHERTag
                 '''
             }
         }
@@ -267,4 +282,3 @@ pipeline {
     }
 }
 }
-
