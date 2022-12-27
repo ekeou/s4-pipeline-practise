@@ -1,13 +1,13 @@
 image:
   db:
      repository: devopseasylearning2021/s4-db
-     tag: "$TAG"
+     tag: "$DBTag"
   ui:
      repository: devopseasylearning2021/s4-ui
-     tag: "$TAG"
+     tag: "$UITag"
   auth:
      repository: devopseasylearning2021/s4-auth
-     tag: "$TAG"
+     tag: "$AUTHTag"
   weather:
      repository: devopseasylearning2021/s4-weather
-     tag: "$TAG"
+     tag: "$WEATHERTag"
