@@ -3,7 +3,7 @@ pipeline {
     agent {
         label ("node1 || node2 || node3 || node4 || branch ||  main ||  jenkins-node || docker-agent ||  jenkins-docker2 ||  preproduction ||  production")
             }
-            }
+            
 
     options {
     buildDiscarder(logRotator(numToKeepStr: '2'))
@@ -239,4 +239,4 @@ cd -
       slackSend (channel: '#development-alerts', color: '#FF0000', message: "FAILURE: Images  have NOT been pushed to Nexus")
     }
 }
-
+}
