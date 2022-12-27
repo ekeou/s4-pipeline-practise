@@ -108,6 +108,10 @@ pipeline {
 
 
         stage('Build-dev') {
+            when{ 
+                expression {
+                    env.Environment == 'DEV' }
+                 }
             steps {
                 sh '''
             cd UI
@@ -126,20 +130,48 @@ pipeline {
             }
         }
 
-        stage('Build-prepod') {
+        stage('Build-sandbox') {
+            when{ 
+                expression {
+                    env.Environment == 'SANDBOX' }
+                 }
             steps {
                 sh '''
-                ls 
-                pwd
+            cd UI
+            docker build -t devopseasylearning2021/s4-ui:${BUILD_NUMBER}$UITag .
+            cd -
+            cd DB
+            docker build -t devopseasylearning2021/s4-db:${BUILD_NUMBER}$DBTag .
+            cd -
+            cd auth 
+            docker build -t devopseasylearning2021/s4-auth:${BUILD_NUMBER}$AUTHTag .
+            cd -
+            cd weather 
+            docker build -t devopseasylearning2021/s4-weather:${BUILD_NUMBER}$WEATHERTag .
+            cd -
                 '''
             }
         }
 
         stage('Build-prod') {
+            when{ 
+                expression {
+                    env.Environment == 'PROD' }
+                 }
             steps {
                 sh '''
-                ls 
-                pwd
+            cd UI
+            docker build -t devopseasylearning2021/s4-ui:${BUILD_NUMBER}$UITag .
+            cd -
+            cd DB
+            docker build -t devopseasylearning2021/s4-db:${BUILD_NUMBER}$DBTag .
+            cd -
+            cd auth 
+            docker build -t devopseasylearning2021/s4-auth:${BUILD_NUMBER}$AUTHTag .
+            cd -
+            cd weather 
+            docker build -t devopseasylearning2021/s4-weather:${BUILD_NUMBER}$WEATHERTag .
+            cd -
                 '''
             }
         }
