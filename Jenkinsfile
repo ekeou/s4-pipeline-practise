@@ -3,7 +3,6 @@ pipeline {
     agent {
         label ("node1 || node2 || node3 || node4 || branch ||  main ||  jenkins-node || docker-agent ||  jenkins-docker2 ||  preproduction ||  production")
             }
-")
             }
 
     options {
