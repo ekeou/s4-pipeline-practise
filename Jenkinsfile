@@ -24,7 +24,7 @@ pipeline {
                         parameters([
                         
                         choice(
-                            choices: ['Dev', 'QA', 'Preprod', 'Prod'], 
+                            choices: ['DEV', 'SANDBOX', 'PROD'], 
                             name: 'Environment'
                                  
                                 ),
@@ -38,28 +38,28 @@ pipeline {
                             ),
 
                           string(
-                            defaultValue: 'donelogio-001',
+                            defaultValue: 'v1.0.0',
                             name: 'DBTag',
 			    description: 'Required to enter the image tag',
                             trim: true
                             ),
 
                           string(
-                            defaultValue: 'donelogio-001',
+                            defaultValue: 'v1.0.0',
                             name: 'UITag',
 			    description: 'Required to enter the image tag',
                             trim: true
                             ),
 
                           string(
-                            defaultValue: 'donelogio-001',
+                            defaultValue: 'v1.0.0',
                             name: 'WHEATHERTag',
 			    description: 'Required to enter the image tag',
                             trim: true
                             ),
 
                           string(
-                            defaultValue: 'donelogio-001',
+                            defaultValue: 'v1.0.0',
                             name: 'AUTHTag',
 			    description: 'Required to enter the image tag',
                             trim: true
@@ -83,7 +83,6 @@ pipeline {
             steps {
                 sh '''
                 ls 
-                pwd
                 '''
             }
         }
@@ -111,18 +110,18 @@ pipeline {
         stage('Build-dev') {
             steps {
                 sh '''
-cd UI
-docker build -t devopseasylearning2021/s4-ui:$UITag .
-cd -
-cd DB
-docker build -t devopseasylearning2021/s4-db:$DBTag .
-cd -
-cd auth 
-docker build -t devopseasylearning2021/s4-auth:$AUTHTag .
-cd -
-cd weather 
-docker build -t devopseasylearning2021/s4-weather:$WEATHERTag .
-cd -
+            cd UI
+            docker build -t devopseasylearning2021/s4-ui:${BUILD_NUMBER}$UITag .
+            cd -
+            cd DB
+            docker build -t devopseasylearning2021/s4-db:${BUILD_NUMBER}$DBTag .
+            cd -
+            cd auth 
+            docker build -t devopseasylearning2021/s4-auth:${BUILD_NUMBER}$AUTHTag .
+            cd -
+            cd weather 
+            docker build -t devopseasylearning2021/s4-weather:${BUILD_NUMBER}$WEATHERTag .
+            cd -
                 '''
             }
         }
@@ -240,3 +239,4 @@ cd -
     }
 }
 }
+
