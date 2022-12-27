@@ -4,6 +4,9 @@ pipeline {
         label ("node1 || node2 || node3 || node4 || branch ||  main ||  jenkins-node || docker-agent ||  jenkins-docker2 ||  preproduction ||  production")
             }
             
+    environment {
+		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+	}
 
     options {
     buildDiscarder(logRotator(numToKeepStr: '2'))
@@ -178,21 +181,15 @@ pipeline {
 
         stage('Login') {
             steps {
-                sh '''
-                ls 
-                pwd
+                sh 
+                '''
+                echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u devopseasylearning2021 --password-stdin'
                 '''
             }
+
         }
 
-        stage('Hello') {
-            steps {
-                sh '''
-                ls 
-                pwd
-                '''
-            }
-        }
+        
 
         stage('Push-to-dockerhub-dev') {
             steps {
